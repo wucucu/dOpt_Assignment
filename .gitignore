@@ -1,0 +1,14 @@
+# For Mac users
+.Ds_Store
+
+# For everyone
+*.aux
+*.bbl
+*.blg
+*.dvi
+*.idx
+*.ind
+*.log
+*.out
+*.synctex.gz
+*.toc
