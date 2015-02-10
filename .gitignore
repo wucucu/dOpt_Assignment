@@ -1,7 +1,7 @@
 # For Mac users
 .Ds_Store
 
-# For everyone
+# latex
 *.aux
 *.bbl
 *.blg
@@ -12,3 +12,8 @@
 *.out
 *.synctex.gz
 *.toc
+
+#vim
+*.swp
+*.swo
+*.*~
