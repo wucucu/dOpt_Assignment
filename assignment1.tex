@@ -1,0 +1,78 @@
+\documentclass[10pt]{article}
+\include{defines}
+
+\title{Compulsory Assignment 1}
+\author{CHU Kailu 201302193}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Problem Description}
+We are considering how we arrange our food for nutrition balance.
+There are some basic constraints, 
+
+\begin{enumerate}
+\item The total \textbf{energy} should be at least 10000kJ;
+\item The energy come from \textbf{fat} should be between 20\% and 30\% of the total energy;
+\item The energy come from \textbf{carbohydrates} should be between 55\% and 60\% of the total energy;
+\item Assume we get the remained energy from \textbf{protein}.
+\item 1g fat(resp. carbohydrates and protein) contain 38kJ(17kJ and 17kJ resp. carbohydrates and protain);
+\end{enumerate}
+
+Now we should decide what we eat in one day and find out the energy disribution. 
+I pick up the following food and list their energy and price,
+
+\begin{center}\begin{tabular}{|l|l|l|l|l|}
+\hline
+Food & Fat & Carbohydrates & Protein & Price \\
+\hline
+\textbf{Skimmed Milk} & 0.3\% & 4.7\% & 3.5\% & 8Dkk/kg \\
+\hline
+\textbf{Raw Salmon} & 10.9\% & 0\% & 19.9\% & 146Dkk/kg \\
+\hline
+\textbf{Raw Cucumber} & 0.1\% & 2.1\% & 0.7\% & 40Dkk/kg \\
+\hline
+\textbf{Savoy Cabbage} & 0.1\% & 6.1\% & 2.0\% & 30Dkk/kg \\
+\hline
+\textbf{Rice} & 1.2\% & 79\% & 1.2\% & 10Dkk/kg\\
+\hline 
+\end{tabular}\end{center}
+
+
+\section{Solution}
+Let $\mathcal{I}$ be the food set and $\mathcal{J}$ be the nutrition set.
+Let $a_{ij} :=$ the percentage that food $i$ contain nutrition $j$ with,
+$p_i:=$ the price(Dkk/kg) of food $i$, 
+$e_j:=$ the energy(kJ/g = 1000kJ/kg = kkJ/kg) of nutrition $j$,
+for $i\in \mathcal{I},j\in \mathcal{J}$.
+
+To come up with the \textbf{Linear Problem}, 
+we let $w_i$ be the variables standing for the consumption(kg) of food $i$.
+We want to minimize the total cost(DKK) in one day 
+$\sum_{i\in\mathcal{I}}p_iw_i$.
+
+We let $s_{ij}:=w_ia_{ij}e_j$ 
+denote the energy(kkJ) obtained in nutrition $j$ from food $i$,
+for $i\in\mathcal{I},j\in\mathcal{J}$.
+We let $E:=\sum_{i\in\mathcal{I},j\in\mathcal{J}}s_{ij}$ 
+denote the total energy(kkJ) one may have in one day. 
+Similarly, we let $E_f:=\sum_{i\in\mathcal{I}}s_{i,1}$
+and $E_c:=\sum_{i\in\mathcal{I}}s_{i,2}$
+denote the fat energy(kkJ) and carbohydrates energy(kkJ) respectively one may have in one day.
+
+Now we can translate the total energe constraint as $E\geq10$ 
+where 10kkJ equals to 10000kJ,
+the fat energy constraint as $E_f\geq0.2E$ and $E_f\leq0.3E$,
+the carbohydrates energy constraint as $E_c\geq0.55E$ and $E_c\leq0.6E$.
+Also, we need to constraint all the variables nonnegative.
+
+We get approximate optimal total price at $71.53$DKK by consuming about $862.9$g Milk, $415.6$g Salmon and $395.4$g Rice.
+But at this solution, we do not have to eat any vegetable. 
+
+
+We can assume $w_3$ and $w_4$ at least $0.1$ both which indicates we must eat some vegetable.
+
+Now we get the approximate optimal total price at $77.98$DKK by consuming about
+$782.0$g Milk, $416.6$g Salmon, $100.0$g Cucumber, $100.0$g Cabbage, $390.0$g Rice.
+\end{document}
