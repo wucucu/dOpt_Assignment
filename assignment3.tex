@@ -9,9 +9,64 @@
 \maketitle
 
 \section{Problem Description}
+We consider a game league playing a tournament with $N$ teams, 
+numbered by $1,2,\dots,N$.
+Each game is played by two team. 
+Winning team gets $2$ points, while losing team gets $0$. 
+Both teams get $1$ point in case of a tie.
+
+Assume we are in the middle of the tournament, i.e., 
+we have a score list for each team.
+Besides, we have a future match list.
+
+We want to find out if it is possible for team $1$ to win the tournament,
+i.e., team $1$'s point strictly larger than any other team.
+
+\section{Preparation for ILP Modelling}
+We assume that team $1$ wins all its future matches. 
+Then we get the final score, denoted as $T$, for team $1$.
+
+Denote by $L$ the list of remaining matches, i.e., 
+future matches that team $1$ is not involved.
+There is no need to consider the matches involving team $1$,
+as all team $1$ will get $0$ points by our assumption.
+
+Denote by $s_i$ the current score of team $i$ for $i=2,3,\dots,N$.
+
+We introduce decision variables $x_{m,t} \in \{0,1,2\}$, 
+standing for the score that team $t$ got in the match $m$
+where $m \in L$ and $t$ is one of the two teams in $m$.
+For convienince, we denote $t_1(m)$ and $t_2(m)$ as the two teams in $m$.
+We can treat $t_1$ as a map from $L$ to $\{2,3,\dots,N\}$, 
+and the same goes for $t_2$.
+
+Then we have team $i$'s final score is 
+$s_i+ \sum_{m: t_1(m)=i \vee t_2(m)=i} x_{m,i}$, for $i = 2,3,\dots,N$.
+
+\section{Completion for the ILP}
+To guarantee team $1$ to be the unique winner, its final score must be largest.
+Then we get contraints
+\[
+  s_i+ \sum_{m: t_1(m)=i}x_{m,i} + \sum_{m: t_2(m)=i}x_{m,i} \leq T-1
+\]
+for $i = 2,3,\dots,N$.
+
+It's easy to see for each match $m \in L$, we get contraint
+\[
+  x_{m,t_1(m)} + x_{m,t_2(m)} = 2
+\]
+as team $t_1(m)$ and team $t_2(m)$ will get total score of $2$
+no matter what the result of the match will be.
+
+To sum up, we model the ILP as following,
+\begin{align*}
+  i \in \{2,\dots,N\}: & s_i+ \sum_{m:t_1(m)=i}x_{m,i} +
+  \sum_{m:t_1(m)=i}x_{m,i} \leq T-1 & \\
+  m \in L: & x_{m,t_1(m)} + x_{m,t_2(m)} = 2 & \\
+  m \in L: & x_{m,t_1(m)},x_{m,t_2(m)} \in \{0,1,2\} &
+\end{align*}.
 
 
-\section{Solution}
 
 
 \end{document}
