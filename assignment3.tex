@@ -61,12 +61,32 @@ no matter what the result of the match will be.
 To sum up, we model the ILP as following,
 \begin{align*}
   i \in \{2,\dots,N\}: & s_i+ \sum_{m:t_1(m)=i}x_{m,i} +
-  \sum_{m:t_1(m)=i}x_{m,i} \leq T-1 & \\
+  \sum_{m:t_2(m)=i}x_{m,i} \leq T-1 & \\
   m \in L: & x_{m,t_1(m)} + x_{m,t_2(m)} = 2 & \\
   m \in L: & x_{m,t_1(m)},x_{m,t_2(m)} \in \{0,1,2\} &
 \end{align*}.
 
+As we focus on the feasiblity of the problem,
+there is no need to consider the "maximum" function
+when we look at the standard form,
+\begin{align*}
+  i \in \{2,\dots,N\}: &
+  \sum_{m:t_1(m)=i}x_{m,i}+\sum_{m:t_2(m)=i}x_{m,i}
+  \leq T-1-s_i \\
+  m \in L: &
+  x_{m,t_1(m)} + x_{m,t_2(m)} \leq 2 \\
+  m \in L: &
+  -x_{m,t_1(m)} - x_{m,t_2(m)} \leq -2 \\
+  m \in L: &
+  x_{m,t_1(m)},x_{m,t_2(m)} \geq 0 \\
+  m \in L: &
+  x_{m,t_1(m)},x_{m,t_2(m)} \in \mathbb{Z}
+\end{align*}.
 
-
+Observe that the coefficient of any variable is
+$1$, $0$, or $-1$. 
+Hence the problem is totally unimodular.
+Then the basic solutions of the problem consists of integers. 
+The problem can be solved by simplex algorithm.
 
 \end{document}
